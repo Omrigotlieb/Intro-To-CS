@@ -120,7 +120,6 @@ public class Matrix {
 	int numOfRows = getRowsNumber();
 	int numOfColumns = getColsNumber();
 	int numOfOtherColumns = other.getColsNumber();
-	int[][] A = toArray();
 	int[][] B = other.toArray();
 	// New Matrix of A.rows X B.Columns
 	int[][] C = new int[numOfRows][numOfOtherColumns];
@@ -129,7 +128,7 @@ public class Matrix {
 	for (int i = 0; i < numOfRows; i++) {
 	    for (int j = 0; j < numOfOtherColumns; j++) {
 		for (int k = 0; k < numOfColumns; k++) {
-		    C[i][j] += A[i][k]*B[k][j];   
+		    C[i][j] += data[i][k]*B[k][j];   
 		}
 	    }
 	}
@@ -206,10 +205,19 @@ public class Matrix {
     
     
     public Matrix transpose() {
-	// TODO: implement.
+	int numOfRows = getRowsNumber();
+	int numOfColumns = getColsNumber();
+	// construct result matrix and switch the Rows and Columns;
+	int[][] result = new int[numOfColumns][numOfRows];
+	for (int i = 0; i < numOfRows; i++) {
+	    for (int j = 0; j < numOfColumns; j++) {
+		// Assign the rows to the columns and vice versa   
+		result[j][i] = data[i][j];
+	    }
+	}
 
-	// Delete dummy return statement after implementation.
-	return null;	
+	// return the result matrix.
+	return new Matrix(result);	
     }
 
     /**
